@@ -1,21 +1,71 @@
 package logic;
 
 import java.io.*;
+
 import java.util.ArrayList;
-import models.*;
+
+import model.*;
 
 public class Shelter implements Serializable{
     private String shelterName;
     private String address;
     private String phone;
+  
+    private ArrayList<Vet> vetList;
+    private ArrayList<Adopter> adopterList;
+    private ArrayList<Animal> animalList;
+    private ArrayList<ShelterStaff> staffList;
 
 
     public Shelter(String shelterName, String address, String phone){
         this.shelterName = shelterName;
         this.address = address;
         this.phone = phone;
+        
+        this.vetList = new ArrayList<>();
+        this.adopterList = new ArrayList<>(); 
+        this.animalList = new ArrayList<>();
+        this.staffList = new ArrayList<>();
+        
     }
-
+    
+    public void findUser(String usr, String pass){
+    	int vIndex = findInVetList(usr, pass);
+    	
+    	if ( vIndex >= 0 ) {
+    		System.out.println("User is vet");
+    	}
+    }
+    
+    public int findInVetList(String usr, String pass){
+    	int i;
+    	for (i=0; i<this.vetList.size(); i++) {
+    		Vet v = this.vetList.get(i);
+    		
+    		System.out.println(v.getUsername());
+    	}
+    	
+    }
+    
+    //add Staff to shelter list
+    public void addShelterStaff(ShelterStaff s) {
+    	staffList.add(s);
+    }
+    
+    //add Vet to shelter list
+    public void addVet(Vet v) {
+    	vetList.add(v);
+    }
+    
+    //add Adopter to shelter list
+    public void addAdopter(Adopter a) {
+    	adopterList.add(a);
+    }
+    
+    //add Animal to shelter list    
+    public void addAnimal(Animal a) {
+    	animalList.add(a);
+    }
 
     public String getShelterName(){
         return this.shelterName;
