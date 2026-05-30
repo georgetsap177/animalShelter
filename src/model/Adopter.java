@@ -1,5 +1,6 @@
 package model;
 
+// Preparation of Adopter menu
 public class Adopter extends User{
 
     private String userAddress;
