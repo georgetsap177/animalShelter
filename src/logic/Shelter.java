@@ -16,12 +16,13 @@ public class Shelter implements Serializable{
     private ArrayList<Animal> animalList;
     private ArrayList<ShelterStaff> staffList;
 
-
+    // Shelter constructor 
     public Shelter(String shelterName, String address, String phone){
         this.shelterName = shelterName;
         this.address = address;
         this.phone = phone;
         
+        // Creating empty array lists for vets, adopters, animals and staff        
         this.vetList = new ArrayList<>();
         this.adopterList = new ArrayList<>(); 
         this.animalList = new ArrayList<>();
@@ -29,21 +30,75 @@ public class Shelter implements Serializable{
         
     }
     
-    public void findUser(String usr, String pass){
-    	int vIndex = findInVetList(usr, pass);
+    // Searching for given username and password and if successful
+    // Determining if user is staff or vet or adopter    
+    public String findUser(String usr, String pass){
+    	String result = "";
     	
-    	if ( vIndex >= 0 ) {
-    		System.out.println("User is vet");
+    	int vIndex = this.findInVetList(usr, pass);
+    	int aIndex = this.findInAdoptList(usr, pass);
+    	int sIndex = this.findInStaffList(usr, pass);    	
+    	
+    	if ( vIndex >= 0 ) {    		
+    		result = "VET";
+    		
     	}
+    	else if ( aIndex >= 0 ) {
+    		result = "ADOPTER";
+    	}
+    	else if ( sIndex >= 0 ) {
+    		result = "STAFF";
+    	}
+    	else {
+    		System.out.println("Wrong username or password");
+    		result = "OTHER";
+    	}
+    	
+    	return result;
     }
     
+    // Searching username and password in vetname list
     public int findInVetList(String usr, String pass){
-    	int i;
+    	int i, p = -1;
+    	
     	for (i=0; i<this.vetList.size(); i++) {
     		Vet v = this.vetList.get(i);
     		
-    		System.out.println(v.getUsername());
+    		if ( v.getUsername().equals(usr) && v.getPassword().equals(pass) ) {
+    			p=i;
+    		}  		  		
     	}
+    	return p;
+    	
+    }
+    
+    // Searching username and password in Staffname list
+    public int findInStaffList(String usr, String pass){
+    	int i, p = -1;
+    	
+    	for (i=0; i<this.staffList.size(); i++) {
+    		ShelterStaff s = this.staffList.get(i);
+    		
+    		if ( s.getUsername().equals(usr) && s.getPassword().equals(pass) ) {
+    			p=i;
+    		}  		  		
+    	}
+    	return p;
+    	
+    }
+
+    // Searching username and password in Adoptionname list
+    public int findInAdoptList(String usr, String pass){
+    	int i, p = -1;
+    	
+    	for (i=0; i<this.adopterList.size(); i++) {
+    		Adopter a = this.adopterList.get(i);
+    		
+    		if ( a.getUsername().equals(usr) && a.getPassword().equals(pass) ) {
+    			p=i;
+    		}  		  		
+    	}
+    	return p;
     	
     }
     
