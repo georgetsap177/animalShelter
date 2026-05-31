@@ -1,21 +1,24 @@
 package model;
 
 // Preparation of Adopter menu
-public class Adopter extends User{
+public class Adopter extends User {
+
+    private static final long serialVersionUID = 1L;
 
     private String userAddress;
     private String profileDescription;
     private int age;
 
 
-    public Adopter(String username, String password, String firstname, String lastname,String userPhone,String email,
-        String userAddress,String profileDescription,int age) {
-        super(username, password, firstname, lastname,userPhone,email);
+    public Adopter(String username, String password, String firstname, String lastname, String userPhone, String email,
+        String userAddress, String profileDescription, int age) {
+        super(username, password, firstname, lastname, userPhone, email);
         this.userAddress = userAddress;
         this.profileDescription = profileDescription;
         setAge(age);
     }
 
+    // searching for address of user
     public String getUserAddress(){
      return userAddress; 
     }
@@ -24,6 +27,7 @@ public class Adopter extends User{
 
     }
 
+    // searching profile description details
     public String getProfileDescription(){
      return profileDescription; 
     }
@@ -42,6 +46,4 @@ public class Adopter extends User{
             throw new IllegalArgumentException("Invalid age.");
         }
     }
-    
-    
 }
