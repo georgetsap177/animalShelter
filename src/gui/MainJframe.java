@@ -98,14 +98,15 @@ public class MainJframe extends JFrame {
     /**
      * Create the frame.
      */
-    public MainJframe(Shelter loadedShelter){        
-        
+    public MainJframe(Shelter loadedShelter){
+    	setRootPaneCheckingEnabled(true);          
         // Κλειδώνουμε το instance που φορτώθηκε από το αρχείο
         this.s1 = loadedShelter; 
         
         setTitle("Animal shelter - " + s1.getShelterName()); // Δυναμικός τίτλος για να βλέπεις άμεσα αν άλλαξε!
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, 450, 300);
+        setBounds(100, 100, 358, 208);
+        setLocationRelativeTo(null);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         setContentPane(contentPane);
@@ -174,7 +175,7 @@ public class MainJframe extends JFrame {
                 }
                 else if ( res.equals("ADOPTER") ){
                     MainJframe.this.dispose();
-                    AdopterFrame af = new AdopterFrame(s1);
+                    AdopterFrame af = new AdopterFrame(s1, null);
                     af.setVisible(true);
                 }
                 else{
@@ -187,5 +188,8 @@ public class MainJframe extends JFrame {
         gbc_btnLogin.gridx = 4;
         gbc_btnLogin.gridy = 4;
         panel.add(btnLogin, gbc_btnLogin);
+        
+        // Setting default button the Login button in order to get pressed when user hits enter key 
+    	getRootPane().setDefaultButton(btnLogin);     
     }
 }

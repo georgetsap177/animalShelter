@@ -20,8 +20,7 @@ public class StaffFrame extends JFrame {
         setTitle("Staff Management - " + shelter.getShelterName());
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setSize(750, 500);
-        setLocationRelativeTo(null);
-        
+                
         JTabbedPane tabbedPane = new JTabbedPane();
         getContentPane().add(tabbedPane, BorderLayout.CENTER);
 
@@ -40,6 +39,7 @@ public class StaffFrame extends JFrame {
 
         JButton btnUpdate = new JButton("Update Info");
         btnUpdate.setBounds(150, 170, 150, 30);
+        setLocationRelativeTo(null);
         panelShelter.add(btnUpdate);
         btnUpdate.addActionListener(e -> {
             shelter.setShelterName(txtName.getText());

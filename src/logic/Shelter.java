@@ -132,6 +132,9 @@ public class Shelter implements Serializable {
     }
 
     // --- GETTERS ---
+    public ArrayList<AdoptionApplication> getAdoptionApplicationList(){
+        return this.applicationList;
+    }
     
     public ArrayList<Animal> getAnimalList() {
         return this.animalList;
@@ -180,6 +183,15 @@ public class Shelter implements Serializable {
     }
 
     //(SAVE / LOAD)
+
+    public void saveToFile() {
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream("shelter_data.ser"))) {
+            oos.writeObject(this);
+            System.out.println("Data saved successfully!");
+        } catch (IOException e) {
+            System.err.println("Error saving: " + e.getMessage());
+        }
+    }
 
     public void saveToFile(String filename) {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(filename))) {
